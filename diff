@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <time.h>
+
+int main(int argc, char* argv[]){
+        if (argc =! 2){
+                return 1;
+        }
+        struct stat buf1 = {0};
+        struct stat buf2 = {0};
+        lstat(argv [1], &buf1);
+        lstat(argv [2], &buf2);
+        if (S_ISLNK(buf1.st_mode)){
+                printf("first is symlink");
+        }
+        if (S_ISLNK(buf2.st_mode)){
+                printf("second is symlink");
+        }
+        return 0;
+}
